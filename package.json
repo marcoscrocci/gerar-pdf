@@ -1,0 +1,38 @@
+{
+  "name": "gerar-pdf",
+  "version": "1.0.0",
+  "description": "Gerar PDF a partir de uma página html disponível na internet",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "production": "pm2 start src/loader.js --name my-money-backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoscrocci/gerar-pdf.git"
+  },
+  "keywords": [
+    "pdf"
+  ],
+  "author": "Marcos M. Crocci",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcoscrocci/gerar-pdf/issues"
+  },
+  "homepage": "https://github.com/marcoscrocci/gerar-pdf#readme",
+  "dependencies": {
+    "base-64": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-query-int": "^3.0.0",
+    "moment-timezone": "^0.5.33",
+    "nodemon": "^2.0.8",
+    "pm2": "^5.1.0",
+    "puppeteer": "^10.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.8"
+  }
+}
