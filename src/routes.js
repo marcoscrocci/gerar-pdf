@@ -25,30 +25,32 @@ routes.use(function(req, res, next) {
 routes.get('/pdf/:parametros', async(request, response) => {
     const { parametros } = request.params;
 
-    const pagina = JSON.parse(b64.decode(parametros));
+    const objetos = JSON.parse(b64.decode(parametros));
 
+    const { url, waitUntil, pdf } = objetos;
 
-    response.send(pagina);
-    /*
+    //response.send(objetos);
+    //console.log('url = ', url);
     
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
-    await page.goto('http://localhost:3000/#/livros/relatorio/token', {
-        waitUntil: 'networkidle0'
-    })
+    await page.goto(url, {
+        waitUntil
+    });
 
-    const pdf = await page.pdf({
-        printBackground: true,
-        format: 'A4'
-    })
+    const relatorio = await page.pdf(pdf);
+    // const relatorio = await page.pdf({
+    //     printBackground: true,
+    //     format: 'A4'
+    // })
 
     await browser.close();
 
     response.contentType("application/pdf");
 
-    return response.send(pdf);
-    */
+    return response.send(relatorio);
+    
 });
 
 
