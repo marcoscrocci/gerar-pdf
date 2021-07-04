@@ -21,6 +21,10 @@ routes.use(function(req, res, next) {
     next(); 
 });
 
+routes.get('/verificar', async (req, res) => {
+    res.send('O serviço está funcionando no Heroku!');
+});
+
 
 routes.get('/pdf/:parametros', async(request, response) => {
     const { parametros } = request.params;
