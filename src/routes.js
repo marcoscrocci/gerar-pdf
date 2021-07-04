@@ -31,32 +31,40 @@ routes.get('/pdf/:parametros', async(request, response) => {
         const { parametros } = request.params;
     
         const objetos = JSON.parse(b64.decode(parametros));
+        console.log('objetos =', objetos);
     
         const { url, waitUntil, pdf } = objetos;
     
         //response.send(objetos);
         //console.log('url = ', url);
         
+        console.log('const browser = await puppeteer.launch();');
         const browser = await puppeteer.launch();
+        console.log('const page = await browser.newPage();');
         const page = await browser.newPage();
     
+        console.log('await page.goto(url, { waitUntil });');
         await page.goto(url, {
             waitUntil
         });
     
+        console.log('const relatorio = await page.pdf(pdf);');
         const relatorio = await page.pdf(pdf);
         // const relatorio = await page.pdf({
         //     printBackground: true,
         //     format: 'A4'
         // })
     
+        console.log('await browser.close();');
         await browser.close();
-    
+        
+        console.log('response.contentType("application/pdf");');
         response.contentType("application/pdf");
-    
+        
+        console.log('return response.send(relatorio);');
         return response.send(relatorio);
     } catch (error) {
-        console.log(error);
+        console.log('Ocorreu um erro ao tentar executar o gerar-pdf. Erro:',  error);
         return response.send(error);
     }
     
