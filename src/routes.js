@@ -27,33 +27,38 @@ routes.get('/verificar', async (req, res) => {
 
 
 routes.get('/pdf/:parametros', async(request, response) => {
-    const { parametros } = request.params;
-
-    const objetos = JSON.parse(b64.decode(parametros));
-
-    const { url, waitUntil, pdf } = objetos;
-
-    //response.send(objetos);
-    //console.log('url = ', url);
+    try {
+        const { parametros } = request.params;
     
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    await page.goto(url, {
-        waitUntil
-    });
-
-    const relatorio = await page.pdf(pdf);
-    // const relatorio = await page.pdf({
-    //     printBackground: true,
-    //     format: 'A4'
-    // })
-
-    await browser.close();
-
-    response.contentType("application/pdf");
-
-    return response.send(relatorio);
+        const objetos = JSON.parse(b64.decode(parametros));
+    
+        const { url, waitUntil, pdf } = objetos;
+    
+        //response.send(objetos);
+        //console.log('url = ', url);
+        
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+    
+        await page.goto(url, {
+            waitUntil
+        });
+    
+        const relatorio = await page.pdf(pdf);
+        // const relatorio = await page.pdf({
+        //     printBackground: true,
+        //     format: 'A4'
+        // })
+    
+        await browser.close();
+    
+        response.contentType("application/pdf");
+    
+        return response.send(relatorio);
+    } catch (error) {
+        console.log(error);
+        return response.send(error);
+    }
     
 });
 
