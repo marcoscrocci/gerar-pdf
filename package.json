@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
     "production": "pm2 start src/loader.js --name my-money-backend"
   },
   "repository": {
