@@ -39,7 +39,12 @@ routes.get('/pdf/:parametros', async(request, response) => {
         //console.log('url = ', url);
         
         console.log('const browser = await puppeteer.launch();');
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+            ],
+        });
         console.log('const page = await browser.newPage();');
         const page = await browser.newPage();
     
